@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="map-response" format="json">
+      <types:shape format="weave" example="examples/sample-direction-matrix-response.json"><![CDATA[%dw 2.0
+type map_response = {|
+  destination_addresses: Array<String>, 
+  origin_addresses: Array<String>, 
+  rows: Array<{|
+    elements: Array<{|
+      distance: {|
+        text: String, 
+        value: Number {"typeId": "int"}
+      |}, 
+      duration: {|
+        text: String, 
+        value: Number {"typeId": "int"}
+      |}, 
+      status: String
+    |}>
+  |}>, 
+  status: String
+|} {"MetadataFormat": "json",
+"example": "{\"destination_addresses\":[\"Intu Trafford Centre, Peel Avenue, Manchester M17 8JL, United Kingdom\"],\"origin_addresses\":[\"Grange Rd, Manchester M21 9WX, UK\"],\"rows\":[{\"elements\":[{\"distance\":{\"text\":\"4.0 mi\",\"value\":6453},\"duration\":{\"text\":\"13 mins\",\"value\":804},\"status\":\"OK\"}]}],\"status\":\"OK\"}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="location-response" format="json">
+      <types:shape format="weave" example="examples/sample-location-response.json"><![CDATA[%dw 2.0
+type location_response = Array<{|
+  name: String, 
+  distance: String
+|}> {"MetadataFormat": "json",
+"example": "[{\"name\":\"Acem Superstore, Birmingham\",\"distance\":\"10\"},{\"name\":\"Acme Express, Solihull\",\"distance\":\"4\"}]"}
+
+]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#e866fea3-9240-4993-8c4c-c72ece7b15e7">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="map-response"/>
+        </types:message>
+      </types:input-event>
+      <types:output-event>
+        <types:message>
+          <types:payload type="location-response"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#f4ac941b-2bbd-4f10-a4c6-5084d0f4292d"/>
+</types:mule>

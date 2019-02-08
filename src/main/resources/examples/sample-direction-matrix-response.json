@@ -1,0 +1,26 @@
+{
+	"destination_addresses": [
+		"Intu Trafford Centre, Peel Avenue, Manchester M17 8JL, United Kingdom"
+	],
+	"origin_addresses": [
+		"Grange Rd, Manchester M21 9WX, UK"
+	],
+	"rows": [
+		{
+			"elements": [
+				{
+					"distance": {
+						"text": "4.0 mi",
+						"value": 6453
+					},
+					"duration": {
+						"text": "13 mins",
+						"value": 804
+					},
+					"status": "OK"
+				}
+			]
+		}
+	],
+	"status": "OK"
+}

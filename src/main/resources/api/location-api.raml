@@ -1,0 +1,40 @@
+#%RAML 1.0
+baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/941a46d5-e517-4f99-888e-99b79eed6709/ # 
+version: v1
+title: Location API
+       
+/location:
+  get:
+    queryParameters:
+      home:
+        type: string
+        description: The delivery location
+        required: true
+        example: "2 Cros Rise, Luton LU5 4GH"
+      sites:
+        type: array
+        items: string
+        minItems: 1
+        description: The addresses of sites to check the distance from
+        required: true
+        example: [ '1 Old Street, London NE13 0UP' ]
+      distance:
+        type: integer
+        description: The maximum distance a site can be from the home location
+        required: true
+        example: 5
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              [
+                {
+                  "name": "Acem Superstore, Birmingham",
+                  "distance": "10"
+                },
+                {
+                  "name": "Acme Express, Solihull",
+                  "distance": "4"
+                }
+              ]
