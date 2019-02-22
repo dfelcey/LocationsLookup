@@ -127,7 +127,9 @@ output application/json
 				<ee:set-variable variableName="destString" ><![CDATA[%dw 2.0
 output application/java
 ---
-splitBy(attributes.queryString, "&") filter ((item, index) -> item startsWith("sites")) reduce((val, acc = "") -> acc ++ "|" ++ val[sizeOf("sites=") to -1])]]></ee:set-variable>
+splitBy(attributes.queryString, "&") 
+	filter ((item, index) -> item startsWith("sites")) 
+	reduce((val, acc = "") -> acc ++ "|" ++ val[sizeOf("sites=") to -1])]]></ee:set-variable>
 			</ee:variables>
 		</ee:transform>
 		<http:request method="GET" doc:name="Request" doc:id="9bf8c744-8eb3-4aa2-be8b-af20696b6e55" config-ref="HTTP_Request_configuration" url="${maps.url}">
